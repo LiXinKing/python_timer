@@ -31,7 +31,6 @@ class TimerManagement(object):
             self.__timer_ticking.pop(timer_name)
 
     def timer_ticking(self, timer_name, timer_func, func_para):
-        print "in timer_ticking"
         timer_func(func_para)
         self.pop_timer(timer_name)
 

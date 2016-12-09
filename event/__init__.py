@@ -1,6 +1,7 @@
 import os
-from remind import timer_remind
-from delay_remind import delay_remind
-from absolute_remind import absolute_remind
-
-os.path.join(os.path.dirname(__file__), '..')
+a = os.listdir("event")
+for file in os.listdir("event"):
+    if "__" in file or file.split(".")[1] == "pyc":
+        continue
+    str = "from event.%s import %s" % (file.split(".")[0], file.split(".")[0])
+    exec(str, globals())
