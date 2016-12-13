@@ -6,6 +6,7 @@ g_DialogType2Func = {
     "DialogAlarm" : DialogAlarm
 }
 
+# TODO:add a QtThread to fix Dialog show error http://blog.csdn.net/mr_zing/article/details/46945011
 class DialogManagement(object):
     @classmethod
     def show_Dialog(cls, msg, type):
