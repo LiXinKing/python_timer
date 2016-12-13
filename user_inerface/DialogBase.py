@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt4 import QtCore, QtGui
-import sys
+from user_inerface.DialogThread import DialogThread
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -18,18 +18,28 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class DialogBase(object):
+    """
+    线程显示
+    """
+    def __init__(self):
+        self.delay_time = 1
+
     def setup_ui(self, Dialog, msg):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(20, 20)
-        self.retranslate_ui(Dialog, msg)
+        pass
 
     def retranslate_ui(self, Dialog, msg):
-        Dialog.setWindowTitle(_translate("Dialog", "Test", None))
+        pass
+
+    def set_delay_time(self, delay_time):
+        self.delay_time = delay_time
+
+    def get_delay_time(self):
+        return self.delay_time
 
     def show_dialog(self, msg):
-        app = QtGui.QApplication(sys.argv)
-        form = QtGui.QWidget()
-        ui = DialogBase()
-        ui.setup_ui(form, "msg")
-        form.show()
-        sys.exit(app.exec_())
+        self.showThread = DialogThread(self.get_delay_time())
+        self.showThread.finish_signal.connect(self.show_finish)
+        self.showThread.start()
+
+    def show_finish(self, result_dict):
+        pass

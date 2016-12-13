@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import threading
 from user_inerface.DialogAlarm import DialogAlarm
 
 g_DialogType2Func = {

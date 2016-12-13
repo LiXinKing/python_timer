@@ -19,7 +19,13 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class DialogAlarm(DialogBase):
+    def __init__(self):
+        super(DialogAlarm, self).__init__()
+        self.app = QtGui.QApplication(sys.argv)
+        self.form = QtGui.QDialog()
+
     def setup_ui(self, Dialog, msg):
+        super(DialogAlarm, self).setup_ui(Dialog, msg)
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(400, 300)
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
@@ -37,21 +43,22 @@ class DialogAlarm(DialogBase):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslate_ui(self, Dialog, msg):
+        super(DialogAlarm, self).retranslate_ui(Dialog, msg)
         Dialog.setWindowTitle(_translate("Dialog", "Alarm", None))
         self.label.setText(_translate("Dialog", "%s" % msg, None))
 
     def show_dialog(self, msg):
-        app = QtGui.QApplication(sys.argv)
-        form = QtGui.QDialog()
-        ui = DialogAlarm()
-        ui.setup_ui(form, msg)
-        form.show()
-        sys.exit(app.exec_())
+        super(DialogAlarm, self).show_dialog(msg)
+        self.setup_ui(self.form, msg)
+        self.form.show()
+        sys.exit(self.app.exec_())
+
+    def show_finish(self, result_dict):
+        super(DialogAlarm, self).show_finish(result_dict)
+        self.app.exit()
 
 if __name__ == "__main__":
-        app = QtGui.QApplication(sys.argv)
-        form = QtGui.QDialog()
+        #app = QtGui.QApplication(sys.argv)
+        #form = QtGui.QDialog()
         ui = DialogAlarm()
-        ui.setup_ui(form, "1")
-        form.show()
-        sys.exit(app.exec_())
+        ui.show_dialog("hello")
