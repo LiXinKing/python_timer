@@ -16,7 +16,9 @@ class TimerManagement(object):
         self.__timer_ticking = {}
 
     def batch_regist(self, timer_dict):
-        self.__timer_dict.update(timer_dict)
+        for timer_name, timer_info in timer_dict.items():
+            self.regist(timer_name, timer_info[0], timer_info[1], timer_info[2])
+
 
     def regist(self, timer_name, timer_stamp, timer_func, func_para):
         if timer_name not in self.__timer_dict and timer_name not in self.__timer_ticking:
@@ -31,8 +33,8 @@ class TimerManagement(object):
             self.__timer_ticking.pop(timer_name)
 
     def timer_ticking(self, timer_name, timer_func, func_para):
-        timer_func(func_para)
         self.pop_timer(timer_name)
+        timer_func(func_para)
 
     def batch_unregist(self):
         self.__timer_dict = {}

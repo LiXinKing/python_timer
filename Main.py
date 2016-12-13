@@ -11,11 +11,11 @@ import time
 
 def main():
 
-    g_relative_timer_instance.batch_regist(g_relative_timer_regist_dict)
     while True:
         time.sleep(0.1)
         g_absolute_timer_instance.batch_regist(g_absolute_timer_regist_dict)
         g_round_timer_instance.batch_regist(g_round_timer_regist_dict)
+        g_relative_timer_instance.batch_regist(g_relative_timer_regist_dict)
         g_absolute_timer_instance.do()
         g_relative_timer_instance.do()
         g_round_timer_instance.do()
